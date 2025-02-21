@@ -1,12 +1,19 @@
+from stats import wordcount
+import sys
+
+
 def main():
-    with open("books/frankenstein.txt") as f:
+    if len(sys.argv) < 2:
+        print("Usage: python3 main.py <path_to_book>")
+        sys.exit(1)
+    with open(sys.argv[1]) as f:
         file_contents =  f.read()
+    print(f"{wordcount(file_contents)} words found in the document")
     report = letter_report(charactercount(file_contents))
     for i in report:
-        print(f"The '{i[0]}' character was found {i[1]} times")
+        print(f"The '{i[0]}: {i[1]}'")
 
-def wordcount(text):
-    return len(text.split())
+
 
 def charactercount(text):
     result = {}
